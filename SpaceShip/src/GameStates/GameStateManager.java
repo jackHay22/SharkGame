@@ -6,14 +6,21 @@ import java.util.ArrayList;
 public class GameStateManager {
 	private Menu menu;
 	private LevelState level;
+	private ScorePage score;
+	private AboutPage about;
 	private ArrayList<GameState> gamestates;
 	int currentState = 0;
 	
 	public GameStateManager() {
 		menu = new Menu(this);
 		gamestates = new ArrayList<GameState>();
+		this.score = new ScorePage(0, this);
+		this.about = new AboutPage(this);
+		
 		gamestates.add(menu);
 		gamestates.add(menu); //placeholder
+		gamestates.add(this.score);
+		gamestates.add(this.about); //3
 
 	}
 	public void update() {	
@@ -42,5 +49,9 @@ public class GameStateManager {
 		level = new LevelState(this); //create new level
 		gamestates.set(1, level);
 		this.currentState = 1;
+	}
+	public void setScore(double score) {
+		this.score.updateScore(score);
+		setState(2);
 	}
 }

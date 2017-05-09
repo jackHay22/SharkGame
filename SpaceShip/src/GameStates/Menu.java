@@ -21,6 +21,8 @@ public class Menu implements GameState {
 	private Color selected;
 	private Color unselected;
 	
+	private double score;
+	
 	public Menu(GameStateManager gsm) {
 		this.gsm = gsm;
 		backgrounds = new ArrayList<ScrollingBack>();
@@ -65,7 +67,7 @@ public class Menu implements GameState {
 
 		}
 		if (currentChoice == 1) {
-			//gsm.setState(3); //team
+			gsm.setState(3); //team
 		}
 		if (currentChoice == 2) {
 			System.exit(0);	//quit
