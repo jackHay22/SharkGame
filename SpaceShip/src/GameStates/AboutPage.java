@@ -8,6 +8,7 @@ import Object.Title;
 
 public class AboutPage implements GameState{
 
+	//prepare background
 	private String[] fileBack = 
 		{"/Paralax/Menu/title_4.png", "/Paralax/Menu/title_3.png", "/Paralax/Menu/title_2.png", "/Paralax/Menu/title_1.png"};
 	private double[] baseScale = {0, -.3, -.6, -1};
@@ -16,6 +17,7 @@ public class AboutPage implements GameState{
 	private GameStateManager gsm;
 	
 	public AboutPage(GameStateManager gsm) {
+		//init backgrounds
 		backgrounds = new ArrayList<ScrollingBack>();
 		for (int i = 0; i < 4; i++) {
 			backgrounds.add(new ScrollingBack(fileBack[i], baseScale[i], 0, 0));
@@ -26,7 +28,7 @@ public class AboutPage implements GameState{
 	}
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
+		// update backgrounds
 		for (int i = 0; i < 4; i++) {
 			backgrounds.get(i).update();
 		}
@@ -34,7 +36,7 @@ public class AboutPage implements GameState{
 
 	@Override
 	public void draw(Graphics2D g) {
-		// TODO Auto-generated method stub
+		//draw title and backgrounds
 		for (int i = 0; i < 4; i++) {
 			backgrounds.get(i).draw(g);
 		}
@@ -43,7 +45,7 @@ public class AboutPage implements GameState{
 
 	@Override
 	public void keyPressed(int keyCode) {
-		// TODO Auto-generated method stub
+		// return to menu
 		if (keyCode == KeyEvent.VK_ENTER) {
 			this.gsm.setState(0);
 		}
@@ -51,7 +53,7 @@ public class AboutPage implements GameState{
 
 	@Override
 	public void keyReleased(int keyCode) {
-		// TODO Auto-generated method stub
+
 		
 	}
 

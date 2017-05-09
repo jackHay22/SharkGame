@@ -12,30 +12,30 @@ public class Title implements StaticObject{
 	private int y;
 	
 	public Title(String s, int x, int y) {
+		//create a title based on an image
 		try {
 			image = ImageIO.read(getClass().getResourceAsStream(s));
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		//init position
 		this.x = x;
 		this.y = y;
 	}
 	@Override
 	public void setPosition(double x, double y) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public Rectangle getBounds() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public void draw(Graphics2D g) {
-		// TODO Auto-generated method stub
+		// draw image
 		g.drawImage(image, this.x, this.y, null);
 	}
 

@@ -15,6 +15,7 @@ public class ScrollingBack {
 	private double x2 = 0;
 	
 	public ScrollingBack(String imageLoc, double dx, double x, double y) {
+		//read image
 		try {
 			image = ImageIO.read(getClass().getResourceAsStream(imageLoc));
 
@@ -26,11 +27,13 @@ public class ScrollingBack {
 		this.y = y % GamePanel.HEIGHT;
 	}
 	public void update() {
+		//update images
 		x += dx;
 		x2 += dx;
 	}
 	
 	public void draw(Graphics2D g) {
+		//draw two image based on position for seamless scroll
 		g.drawImage(image, (int)x, (int)y, null);
 		
 		if(x < 0) {

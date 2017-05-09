@@ -9,35 +9,40 @@ import java.util.ArrayList;
 import Object.Title;
 
 public class Menu implements GameState {
+	//current gamestate manager
 	private GameStateManager gsm;
+	
+	//preparation for scrolling background
 	private String[] fileBack = 
 		{"/Paralax/Menu/title_4.png", "/Paralax/Menu/title_3.png", "/Paralax/Menu/title_2.png", "/Paralax/Menu/title_1.png"};
 	private double[] baseScale = {0, -.3, -.6, -1};
 	private ArrayList<ScrollingBack> backgrounds;
 	private Title title;
+	
+	//menu options
 	private int currentChoice = 0;
 	private String[] options = {"Start", "About", "Quit" };
 	private Font font;
 	private Color selected;
 	private Color unselected;
 	
-	private double score;
-	
 	public Menu(GameStateManager gsm) {
 		this.gsm = gsm;
+		//add backgrounds to arraylist for update and draw
 		backgrounds = new ArrayList<ScrollingBack>();
 		for (int i = 0; i < 4; i++) {
 			backgrounds.add(new ScrollingBack(fileBack[i], baseScale[i], 0, 0));
 		}
 		title = new Title("/Paralax/Menu/title_Menu.png", 25, 40);
 		
+		//initialize option font and colors
 		font = new Font("Arial", Font.PLAIN, 12);
 		selected = Color.decode("#f54f29");
 		unselected = Color.decode("#ffd393");
 	}
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
+		//update all background images
 		for (int i = 0; i < 4; i++) {
 			backgrounds.get(i).update();
 		}
@@ -45,11 +50,12 @@ public class Menu implements GameState {
 
 	@Override
 	public void draw(Graphics2D g) {
-		// TODO Auto-generated method stub
+		// draw background images, title, and menu options
 		for (int i = 0; i < 4; i++) {
 			backgrounds.get(i).draw(g);
 		}
 		title.draw(g);
+		g.setFont(font);
 		for (int i=0; i <options.length; i++) {
 			if(i == currentChoice) {
 				g.setColor(selected);
@@ -62,6 +68,7 @@ public class Menu implements GameState {
 		}
 	}
 	private void select() {
+		//select current choice
 		if (currentChoice == 0) {
 			gsm.start(); //start
 
@@ -77,7 +84,7 @@ public class Menu implements GameState {
 
 	@Override
 	public void keyPressed(int keyCode) {
-		// TODO Auto-generated method stub
+		// use key event to select or change selection
 		if (keyCode == KeyEvent.VK_ENTER) {
 			select();
 		}

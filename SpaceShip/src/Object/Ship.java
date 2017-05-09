@@ -8,15 +8,16 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
 import GameStates.LevelState;
-import Main.GamePanel;
 
 public class Ship implements MovingObject {
+	//attributes
 	private BufferedImage image;
 	private double x;
 	private double y;
 	private double dy;
 	
 	public Ship(String s, double x, double y) {
+		//read image from resources
 		try {
 			image = ImageIO.read(getClass().getResourceAsStream(s));
 
@@ -39,11 +40,13 @@ public class Ship implements MovingObject {
 
 	
 	public Rectangle getBounds() {	
+		//return ship bounds
 		return new Rectangle((int)x, (int)y, image.getWidth(), image.getHeight());
 	}
 
 	
 	public void update() {
+		//update ship position with gravity, scale back boost from player input
 		this.y += this.dy;
 		this.dy *= .9;
 		this.y += LevelState.GRAVITY;
@@ -56,21 +59,19 @@ public class Ship implements MovingObject {
 
 	
 	public void draw(Graphics2D g) {
+		//draw ship
 		g.drawImage(image, (int) this.x, (int) this.y, null);
 	}
 	
 	public void keyPressed(int keyCode) {
-		// TODO Auto-generated method stub	
+		// boost control
 		if (keyCode == KeyEvent.VK_UP) {
 			this.dy = -7;
-		}
-		if (keyCode == KeyEvent.VK_DOWN) {
-			//this.dy = 10;
 		}
 	}
 
 	public double getY() {
-		// TODO Auto-generated method stub
+		// return y position
 		return this.y;
 	}
 

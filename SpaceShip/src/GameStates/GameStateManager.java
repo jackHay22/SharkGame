@@ -4,22 +4,26 @@ import java.awt.Graphics2D;
 import java.util.ArrayList;
 
 public class GameStateManager {
+	//pages
 	private Menu menu;
 	private LevelState level;
 	private ScorePage score;
 	private AboutPage about;
 	private ArrayList<GameState> gamestates;
+	
+	//current page
 	int currentState = 0;
 	
 	public GameStateManager() {
+		//create gamestates
 		menu = new Menu(this);
 		gamestates = new ArrayList<GameState>();
 		this.score = new ScorePage(0, this);
 		this.about = new AboutPage(this);
 		
-		gamestates.add(menu);
-		gamestates.add(menu); //placeholder
-		gamestates.add(this.score);
+		gamestates.add(menu); //0
+		gamestates.add(menu); //placeholder for new level load (1)
+		gamestates.add(this.score);  //2
 		gamestates.add(this.about); //3
 
 	}
@@ -50,8 +54,8 @@ public class GameStateManager {
 		gamestates.set(1, level);
 		this.currentState = 1;
 	}
-	public void setScore(double score) {
-		this.score.updateScore(score);
+	public void setScore(int score) {
+		this.score.updateScore(score); //set state to score page with updated score
 		setState(2);
 	}
 }
